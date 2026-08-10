@@ -27,80 +27,140 @@
 
   /* ---- Topbar ---- */
   header {
-    background: linear-gradient(135deg, var(--navy) 0%, #2c4257 60%, #1f8a70 130%);
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--navy) 0%, #2c4257 55%, #1f8a70 120%);
     color: white;
     padding: 0;
   }
+  header::before, header::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(50px);
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  header::before {
+    width: 340px;
+    height: 340px;
+    background: radial-gradient(circle, var(--amber), transparent 70%);
+    top: -140px;
+    right: -60px;
+  }
+  header::after {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, #35c4a1, transparent 70%);
+    bottom: -160px;
+    left: -40px;
+  }
   .topbar-inner {
-    max-width: 980px;
+    position: relative;
+    max-width: 1320px;
     margin: 0 auto;
-    padding: 40px 24px 34px;
+    padding: 56px 32px 40px;
     text-align: center;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #ffe8b8;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 7px 16px;
+    border-radius: 999px;
+    margin-bottom: 20px;
   }
   .logo-mark {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 64px;
-    height: 64px;
-    border-radius: 18px;
-    background: rgba(255,255,255,0.12);
-    border: 1px solid rgba(255,255,255,0.25);
-    font-size: 32px;
-    margin-bottom: 14px;
+    width: 92px;
+    height: 92px;
+    border-radius: 26px;
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    font-size: 46px;
+    margin-bottom: 20px;
+    transform: rotate(-4deg);
   }
   header h1 {
-    margin: 0 0 8px;
-    font-size: 2.1rem;
+    margin: 0 0 12px;
+    font-size: 3rem;
     letter-spacing: -0.02em;
+  }
+  header h1 .accent {
+    color: var(--amber);
   }
   header p {
     margin: 0 auto;
     color: #cfdae3;
-    font-size: 1.05rem;
-    max-width: 560px;
+    font-size: 1.25rem;
+    max-width: 680px;
   }
   .emoji-strip {
+    position: relative;
     display: flex;
     justify-content: center;
-    gap: 18px;
-    font-size: 1.3rem;
-    padding: 14px 0;
-    background: rgba(0,0,0,0.14);
-    letter-spacing: 4px;
+    align-items: center;
+    gap: 20px;
+    padding: 22px 0 26px;
+  }
+  .emoji-strip span {
+    display: inline-block;
+    font-size: 2rem;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25));
+  }
+  .emoji-strip span:nth-child(1) { transform: rotate(-9deg); }
+  .emoji-strip span:nth-child(2) { transform: rotate(6deg); }
+  .emoji-strip span:nth-child(3) { transform: rotate(-5deg); }
+  .emoji-strip span:nth-child(4) { transform: rotate(8deg); }
+  .emoji-strip span:nth-child(5) { transform: rotate(-7deg); }
+  .header-wave {
+    display: block;
+    width: 100%;
+    height: 44px;
+    margin-top: -2px;
   }
 
   main {
-    max-width: 980px;
+    max-width: 1320px;
     margin: 0 auto;
-    padding: 32px 20px 64px;
+    padding: 44px 32px 80px;
   }
 
   /* ---- Start Here ---- */
   .core {
     background: var(--card-bg);
     border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 28px;
-    margin-bottom: 40px;
+    border-radius: 18px;
+    padding: 36px;
+    margin-bottom: 44px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.04);
   }
   .core h2 {
     margin-top: 0;
-    font-size: 1.3rem;
+    font-size: 1.65rem;
     color: var(--navy);
   }
   .core-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-    gap: 16px;
-    margin-top: 18px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 22px;
+    margin-top: 24px;
   }
   .core-item {
     display: block;
     background: var(--teal-light);
-    border-radius: 12px;
-    padding: 18px;
+    border-radius: 16px;
+    padding: 26px;
     border: 1px solid #cfe9e2;
     text-decoration: none;
     color: inherit;
@@ -111,104 +171,108 @@
     box-shadow: 0 6px 16px rgba(31,138,112,0.18);
     background: #dcf1eb;
   }
+  .core-item-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
   .core-item .row {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
+    gap: 14px;
+    margin-bottom: 4px;
   }
   .core-item .num {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
     background: var(--teal);
     color: white;
     border-radius: 50%;
-    font-size: 0.78rem;
+    font-size: 0.95rem;
     font-weight: 700;
     flex-shrink: 0;
   }
   .icon {
-    width: 28px;
-    height: 28px;
-    border-radius: 7px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
     background: white;
     box-shadow: 0 1px 2px rgba(0,0,0,0.15);
-    padding: 4px;
+    padding: 5px;
     flex-shrink: 0;
   }
   .core-item .name {
     font-weight: 700;
-    font-size: 1.05rem;
+    font-size: 1.35rem;
     color: var(--navy);
   }
-  .core-item p {
-    margin: 0;
-    font-size: 0.88rem;
-    color: var(--muted);
-  }
-  .core-item .tip {
-    display: block;
-    margin-top: 10px;
-    font-size: 0.78rem;
+  .tip-link {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 0.92rem;
+    font-weight: 600;
     color: var(--teal);
+    text-decoration: none;
   }
-  .core-item .tip a { color: var(--teal); }
+  .tip-link:hover { text-decoration: underline; }
 
   h2.section-title {
-    font-size: 1.15rem;
+    font-size: 1.55rem;
     color: var(--navy);
-    margin: 40px 0 16px;
-    padding-bottom: 8px;
+    margin: 48px 0 22px;
+    padding-bottom: 10px;
     border-bottom: 2px solid var(--border);
   }
 
   .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 16px;
+    column-count: 3;
+    column-gap: 22px;
+  }
+  @media (max-width: 980px) {
+    .grid { column-count: 2; }
+  }
+  @media (max-width: 620px) {
+    .grid { column-count: 1; }
   }
   .card {
     background: var(--card-bg);
     border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 20px;
+    border-radius: 18px;
+    padding: 28px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    break-inside: avoid;
+    margin-bottom: 22px;
   }
   .card h3 {
-    margin: 0 0 12px;
-    font-size: 0.8rem;
+    margin: 0 0 16px;
+    font-size: 1.02rem;
     color: var(--muted);
     text-transform: uppercase;
     letter-spacing: 0.03em;
     font-weight: 700;
-  }
-  .card .note {
-    font-size: 0.85rem;
-    color: var(--muted);
-    margin: 10px 0 0;
   }
 
   /* ---- Site tiles (fully clickable) ---- */
   .tiles {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
   }
   .tile {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 10px 12px;
-    border-radius: 10px;
+    gap: 14px;
+    padding: 16px 18px;
+    border-radius: 14px;
     background: #f7f9fb;
     border: 1px solid var(--border);
     text-decoration: none;
     color: var(--ink);
     font-weight: 600;
-    font-size: 0.94rem;
+    font-size: 1.15rem;
     transition: background 0.12s ease, border-color 0.12s ease, transform 0.12s ease;
   }
   .tile:hover {
@@ -216,46 +280,47 @@
     border-color: #b7ddd2;
     transform: translateX(2px);
   }
-  .tile .icon { width: 24px; height: 24px; border-radius: 6px; padding: 3px; }
+  .tile .icon { width: 34px; height: 34px; border-radius: 8px; padding: 4px; }
   .tile .arrow {
     margin-left: auto;
     color: var(--muted);
-    font-size: 0.9rem;
+    font-size: 1.1rem;
   }
 
-  .wide { grid-column: 1 / -1; }
+  .wide { column-span: all; margin-bottom: 22px; }
+  .wide .tiles { margin-bottom: 0; }
   .group-label {
-    font-size: 0.78rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--navy);
-    margin: 16px 0 8px;
+    margin: 24px 0 12px;
     text-transform: uppercase;
     letter-spacing: 0.04em;
   }
   .group-label:first-of-type { margin-top: 0; }
   .tiles-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-    gap: 8px;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 12px;
   }
   .tile .muted {
     color: var(--muted);
     font-weight: 500;
-    font-size: 0.82rem;
+    font-size: 1rem;
   }
   .icon.emoji {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 15px;
+    font-size: 20px;
     background: white;
   }
 
   footer {
     text-align: center;
     color: var(--muted);
-    font-size: 0.85rem;
-    padding: 24px;
+    font-size: 1rem;
+    padding: 30px;
   }
 </style>
 </head>
@@ -263,11 +328,17 @@
 
 <header>
   <div class="topbar-inner">
+    <span class="eyebrow">🏡 The household shopping guide</span>
     <div class="logo-mark">🛍️</div>
-    <h1>Our Shopping Hub</h1>
+    <h1>Our <span class="accent">Shopping</span> Hub</h1>
     <p>The go-to sites for everything we used to buy on Amazon — organized by what to buy where.</p>
   </div>
-  <div class="emoji-strip">🧺 🛒 📦 🎁 💳</div>
+  <div class="emoji-strip">
+    <span>🧺</span><span>🛒</span><span>📦</span><span>🎁</span><span>💳</span>
+  </div>
+  <svg class="header-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path fill="#f4f6f8" d="M0,32 C240,60 480,0 720,16 C960,32 1200,58 1440,24 L1440,60 L0,60 Z"></path>
+  </svg>
 </header>
 
 <main>
@@ -282,7 +353,6 @@
           <img class="icon" src="https://www.google.com/s2/favicons?domain=shop.app&sz=64" alt="">
           <span class="name">Shop app</span>
         </div>
-        <p>Independent &amp; specialty brands, one-click checkout with Shop Pay. Check here first for anything niche.</p>
       </a>
 
       <a class="core-item" href="https://www.costco.com" target="_blank">
@@ -291,7 +361,6 @@
           <img class="icon" src="https://www.google.com/s2/favicons?domain=costco.com&sz=64" alt="">
           <span class="name">Costco</span>
         </div>
-        <p>Bulk groceries, household staples, electronics, furniture. Default for anything in quantity.</p>
       </a>
 
       <a class="core-item" href="https://www.target.com" target="_blank">
@@ -300,18 +369,18 @@
           <img class="icon" src="https://www.google.com/s2/favicons?domain=target.com&sz=64" alt="">
           <span class="name">Target</span>
         </div>
-        <p>Single items, clothing, home decor, seasonal, pharmacy — everything Costco doesn't carry.</p>
       </a>
 
-      <a class="core-item" href="https://shopping.google.com" target="_blank">
-        <div class="row">
-          <span class="num">4</span>
-          <img class="icon" src="https://www.google.com/s2/favicons?domain=google.com&sz=64" alt="">
-          <span class="name">Google Shopping</span>
-        </div>
-        <p>Good starting point when you don't know where to buy something — compares sellers and prices at a glance.</p>
-        <span class="tip">Tip: install <a href="https://chromewebstore.google.com/detail/ublacklist/pncfbmialoiaghdehhbnbhkkgmjanfhe" target="_blank">uBlacklist</a> to hide amazon.com from regular Google search results.</span>
-      </a>
+      <div class="core-item">
+        <a class="core-item-link" href="https://shopping.google.com" target="_blank">
+          <div class="row">
+            <span class="num">4</span>
+            <img class="icon" src="https://www.google.com/s2/favicons?domain=google.com&sz=64" alt="">
+            <span class="name">Google Shopping</span>
+          </div>
+        </a>
+        <a class="tip-link" href="https://chromewebstore.google.com/detail/ublacklist/pncfbmialoiaghdehhbnbhkkgmjanfhe" target="_blank">Tip: install uBlacklist to hide amazon.com from search results →</a>
+      </div>
 
     </div>
   </div>
@@ -326,96 +395,13 @@
           <img class="icon" src="https://www.google.com/s2/favicons?domain=costco.com&sz=64" alt="">
           Costco <span class="arrow">→</span>
         </a>
-        <a class="tile" href="https://www.instacart.com/store/aldi" target="_blank">
-          <img class="icon" src="https://www.google.com/s2/favicons?domain=instacart.com&sz=64" alt="">
-          Aldi (via Instacart) <span class="arrow">→</span>
+        <a class="tile" href="https://www.aldi.us/store/aldi/pages/mobile-app" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=aldi.us&sz=64" alt="">
+          Aldi (app) <span class="arrow">→</span>
         </a>
         <a class="tile" href="https://www.jewelosco.com" target="_blank">
           <img class="icon" src="https://www.google.com/s2/favicons?domain=jewelosco.com&sz=64" alt="">
           Jewel-Osco <span class="arrow">→</span>
-        </a>
-      </div>
-      <p class="note">Aldi has no real site of its own — order through Instacart.</p>
-    </div>
-
-    <div class="card">
-      <h3>Specialty wellness &amp; hydration</h3>
-      <div class="tiles">
-        <a class="tile" href="https://saltt.com" target="_blank">
-          <img class="icon" src="https://www.google.com/s2/favicons?domain=saltt.com&sz=64" alt="">
-          SALTT <span class="arrow">→</span>
-        </a>
-        <a class="tile" href="https://living.redmond.com/products/re-lyte-bulk-pouches-175-serv?variant=41954624503856" target="_blank">
-          <img class="icon" src="https://www.google.com/s2/favicons?domain=living.redmond.com&sz=64" alt="">
-          Redmond Re-Lyte <span class="arrow">→</span>
-        </a>
-        <a class="tile" href="https://www.nzepouches.com" target="_blank">
-          <img class="icon" src="https://www.google.com/s2/favicons?domain=nzepouches.com&sz=64" alt="">
-          NZE Pouches <span class="arrow">→</span>
-        </a>
-      </div>
-      <p class="note">Electrolyte mixes and caffeine pouches — didn't fit neatly under regular groceries.</p>
-    </div>
-
-    <div class="card">
-      <h3>Household &amp; electronics</h3>
-      <div class="tiles">
-        <a class="tile" href="https://www.costco.com" target="_blank">
-          <img class="icon" src="https://www.google.com/s2/favicons?domain=costco.com&sz=64" alt="">
-          Costco <span class="arrow">→</span>
-        </a>
-        <a class="tile" href="https://www.target.com" target="_blank">
-          <img class="icon" src="https://www.google.com/s2/favicons?domain=target.com&sz=64" alt="">
-          Target <span class="arrow">→</span>
-        </a>
-        <a class="tile" href="https://www.bestbuy.com" target="_blank">
-          <img class="icon" src="https://www.google.com/s2/favicons?domain=bestbuy.com&sz=64" alt="">
-          Best Buy <span class="arrow">→</span>
-        </a>
-      </div>
-      <p class="note">Best Buy for anything electronics/appliance-specific — price matching, Geek Squad.</p>
-    </div>
-
-    <div class="card">
-      <h3>General marketplace</h3>
-      <div class="tiles">
-        <a class="tile" href="https://www.ebay.com" target="_blank">
-          <img class="icon" src="https://www.google.com/s2/favicons?domain=ebay.com&sz=64" alt="">
-          eBay <span class="arrow">→</span>
-        </a>
-      </div>
-      <p class="note">Used, refurbished, or hard-to-find items — closest thing to Amazon's overall breadth.</p>
-    </div>
-
-    <div class="card">
-      <h3>Books &amp; media</h3>
-      <div class="tiles">
-        <a class="tile" href="https://bookshop.org" target="_blank">
-          <img class="icon" src="https://www.google.com/s2/favicons?domain=bookshop.org&sz=64" alt="">
-          Bookshop.org <span class="arrow">→</span>
-        </a>
-        <a class="tile" href="https://www.threeavenuesbookshop.com" target="_blank">
-          <img class="icon" src="https://www.google.com/s2/favicons?domain=threeavenuesbookshop.com&sz=64" alt="">
-          Three Avenues Bookshop <span class="arrow">→</span>
-        </a>
-        <a class="tile" href="https://roscoebooks.com" target="_blank">
-          <img class="icon" src="https://www.google.com/s2/favicons?domain=roscoebooks.com&sz=64" alt="">
-          Roscoe Books <span class="arrow">→</span>
-        </a>
-      </div>
-      <p class="note">Same prices as Amazon, supports independent bookstores.</p>
-    </div>
-
-    <div class="card">
-      <h3>Home &amp; furniture</h3>
-      <div class="tiles">
-        <a class="tile" href="https://www.wayfair.com" target="_blank">
-          <img class="icon" src="https://www.google.com/s2/favicons?domain=wayfair.com&sz=64" alt="">
-          Wayfair <span class="arrow">→</span>
-        </a>
-        <a class="tile" href="https://www.target.com" target="_blank">
-          <img class="icon" src="https://www.google.com/s2/favicons?domain=target.com&sz=64" alt="">
-          Target <span class="arrow">→</span>
         </a>
       </div>
     </div>
@@ -436,7 +422,66 @@
           Lowe's <span class="arrow">→</span>
         </a>
       </div>
-      <p class="note">Ace for quick local pickup on small stuff; Home Depot/Lowe's for bigger projects and appliances.</p>
+    </div>
+
+    <div class="card">
+      <h3>Household &amp; electronics</h3>
+      <div class="tiles">
+        <a class="tile" href="https://www.costco.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=costco.com&sz=64" alt="">
+          Costco <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://www.target.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=target.com&sz=64" alt="">
+          Target <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://www.bestbuy.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=bestbuy.com&sz=64" alt="">
+          Best Buy <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>General marketplace</h3>
+      <div class="tiles">
+        <a class="tile" href="https://www.ebay.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=ebay.com&sz=64" alt="">
+          eBay <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Books &amp; media</h3>
+      <div class="tiles">
+        <a class="tile" href="https://bookshop.org" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=bookshop.org&sz=64" alt="">
+          Bookshop.org <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://www.threeavenuesbookshop.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=threeavenuesbookshop.com&sz=64" alt="">
+          Three Avenues Bookshop <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://roscoebooks.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=roscoebooks.com&sz=64" alt="">
+          Roscoe Books <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Home &amp; furniture</h3>
+      <div class="tiles">
+        <a class="tile" href="https://www.wayfair.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=wayfair.com&sz=64" alt="">
+          Wayfair <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://www.target.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=target.com&sz=64" alt="">
+          Target <span class="arrow">→</span>
+        </a>
+      </div>
     </div>
 
     <div class="card">
@@ -522,10 +567,6 @@
           <img class="icon" src="https://www.google.com/s2/favicons?domain=walgreens.com&sz=64" alt="">
           Walgreens <span class="arrow">→</span>
         </a>
-        <a class="tile" href="https://www.target.com" target="_blank">
-          <img class="icon" src="https://www.google.com/s2/favicons?domain=target.com&sz=64" alt="">
-          Target <span class="arrow">→</span>
-        </a>
       </div>
     </div>
 
@@ -541,7 +582,6 @@
           Truemed <span class="arrow">→</span>
         </a>
       </div>
-      <p class="note">Use HSA/FSA dollars on supplements, wellness gear, and other items that don't usually qualify.</p>
     </div>
 
     <div class="card">
@@ -560,7 +600,6 @@
           Dick's Sporting Goods <span class="arrow">→</span>
         </a>
       </div>
-      <p class="note">Play It Again Sports for used/resale gear at a discount — good first stop before buying new.</p>
     </div>
 
     <div class="card">
@@ -585,16 +624,61 @@
       </div>
     </div>
 
+    <div class="card">
+      <h3>Specialty wellness &amp; hydration</h3>
+      <div class="tiles">
+        <a class="tile" href="https://saltt.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=saltt.com&sz=64" alt="">
+          SALTT <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://living.redmond.com/products/re-lyte-bulk-pouches-175-serv?variant=41954624503856" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=living.redmond.com&sz=64" alt="">
+          Redmond Re-Lyte <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://www.nzepouches.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=nzepouches.com&sz=64" alt="">
+          NZE Pouches <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+
     <div class="card wide">
       <h3>Restaurants &amp; catering</h3>
 
       <div class="tiles" style="margin-bottom: 6px;">
         <a class="tile" href="https://docs.google.com/spreadsheets/d/1LflHC-aeXw-XiklVk8_l4wn5cruOuTo7hJZfewmhQ2s/edit?gid=1253701866#gid=1253701866" target="_blank">
           <span class="icon emoji">📋</span>
-          Catering options (full spreadsheet) <span class="arrow">→</span>
+          Full catering spreadsheet <span class="arrow">→</span>
         </a>
       </div>
-      <p class="note">Couldn't pull the sheet's contents in directly — it looks locked to viewers with access, so this links straight to it instead. Share it as "anyone with the link can view" and I can embed the actual rows here.</p>
+
+      <p class="group-label">Catering</p>
+      <div class="tiles-grid">
+        <a class="tile" href="https://smoquebbq.com/locations/catering/" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=smoquebbq.com&sz=64" alt="">
+          Smoque BBQ
+        </a>
+        <a class="tile" href="https://www.honeybutter.com/catering" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=honeybutter.com&sz=64" alt="">
+          Honey Butter Fried Chicken
+        </a>
+        <a class="tile" href="https://www.biascafemarianao.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=biascafemarianao.com&sz=64" alt="">
+          Bia's Cafe Marianao
+        </a>
+        <a class="tile" href="https://linktr.ee/deborincuba" target="_blank">
+          <span class="icon emoji">📍</span>
+          Deborincuba
+        </a>
+        <a class="tile" href="https://www.cafeeltapatio.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=cafeeltapatio.com&sz=64" alt="">
+          El Tapatio Cafe
+        </a>
+        <a class="tile" href="https://90milescubancafe.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=90milescubancafe.com&sz=64" alt="">
+          90 Miles
+        </a>
+      </div>
 
       <p class="group-label">Chicago — regulars</p>
       <div class="tiles-grid">
@@ -618,8 +702,8 @@
           <img class="icon" src="https://www.google.com/s2/favicons?domain=turquoisedining.com&sz=64" alt="">
           Turquoise <span class="muted">· Mediterranean</span>
         </a>
-        <a class="tile" href="https://www.google.com/maps/search/?api=1&query=Do%C3%B1a+Tola+Chicago" target="_blank">
-          <span class="icon emoji">📍</span>
+        <a class="tile" href="https://www.donatola.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=donatola.com&sz=64" alt="">
           Doña Tola <span class="muted">· Mexican</span>
         </a>
         <a class="tile" href="https://tangosurgrill.com" target="_blank">
@@ -630,21 +714,21 @@
           <img class="icon" src="https://www.google.com/s2/favicons?domain=bodegasurchicago.com&sz=64" alt="">
           Bodega Sur <span class="muted">· Argentinian</span>
         </a>
-        <a class="tile" href="https://www.google.com/maps/search/?api=1&query=El+Mexicana+Clark+St+Chicago" target="_blank">
-          <span class="icon emoji">📍</span>
-          El Mexicana (Clark) <span class="muted">· Mexican</span>
+        <a class="tile" href="https://lamexicanagrill.com/lamexicanagrill" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=lamexicanagrill.com&sz=64" alt="">
+          La Mexicana Grill <span class="muted">· Mexican</span>
         </a>
-        <a class="tile" href="https://www.google.com/maps/search/?api=1&query=El+Tap+Chicago" target="_blank">
-          <span class="icon emoji">📍</span>
-          El Tap <span class="muted">· Mexican</span>
+        <a class="tile" href="https://www.cafeeltapatio.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=cafeeltapatio.com&sz=64" alt="">
+          El Tapatio <span class="muted">· Mexican</span>
         </a>
         <a class="tile" href="https://www.ellaellichicago.com" target="_blank">
           <img class="icon" src="https://www.google.com/s2/favicons?domain=ellaellichicago.com&sz=64" alt="">
           Ella Elli <span class="muted">· Mediterranean</span>
         </a>
-        <a class="tile" href="https://www.google.com/maps/search/?api=1&query=Phos+restaurant+Chicago" target="_blank">
-          <span class="icon emoji">📍</span>
-          Phos <span class="muted">· Thai/Viet</span>
+        <a class="tile" href="https://www.phothaicuisine.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=phothaicuisine.com&sz=64" alt="">
+          Pho's Thai Cuisine <span class="muted">· Thai/Viet</span>
         </a>
         <a class="tile" href="https://www.crosbyschicago.com" target="_blank">
           <img class="icon" src="https://www.google.com/s2/favicons?domain=crosbyschicago.com&sz=64" alt="">
