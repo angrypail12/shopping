@@ -24,29 +24,59 @@
     color: var(--ink);
     line-height: 1.5;
   }
+
+  /* ---- Topbar ---- */
   header {
-    background: linear-gradient(135deg, var(--navy), #2c4257);
+    background: linear-gradient(135deg, var(--navy) 0%, #2c4257 60%, #1f8a70 130%);
     color: white;
-    padding: 48px 24px 40px;
+    padding: 0;
+  }
+  .topbar-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 40px 24px 34px;
     text-align: center;
+  }
+  .logo-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    font-size: 32px;
+    margin-bottom: 14px;
   }
   header h1 {
     margin: 0 0 8px;
-    font-size: 2rem;
+    font-size: 2.1rem;
     letter-spacing: -0.02em;
   }
   header p {
-    margin: 0;
+    margin: 0 auto;
     color: #cfdae3;
     font-size: 1.05rem;
     max-width: 560px;
-    margin: 0 auto;
   }
+  .emoji-strip {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    font-size: 1.3rem;
+    padding: 14px 0;
+    background: rgba(0,0,0,0.14);
+    letter-spacing: 4px;
+  }
+
   main {
     max-width: 980px;
     margin: 0 auto;
     padding: 32px 20px 64px;
   }
+
+  /* ---- Start Here ---- */
   .core {
     background: var(--card-bg);
     border: 1px solid var(--border);
@@ -62,41 +92,71 @@
   }
   .core-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
     gap: 16px;
     margin-top: 18px;
   }
   .core-item {
+    display: block;
     background: var(--teal-light);
     border-radius: 12px;
     padding: 18px;
     border: 1px solid #cfe9e2;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+  }
+  .core-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(31,138,112,0.18);
+    background: #dcf1eb;
+  }
+  .core-item .row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
   }
   .core-item .num {
-    display: inline-block;
-    width: 26px;
-    height: 26px;
-    line-height: 26px;
-    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
     background: var(--teal);
     color: white;
     border-radius: 50%;
-    font-size: 0.85rem;
+    font-size: 0.78rem;
     font-weight: 700;
-    margin-bottom: 10px;
+    flex-shrink: 0;
   }
-  .core-item a {
+  .icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+    background: white;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    padding: 4px;
+    flex-shrink: 0;
+  }
+  .core-item .name {
     font-weight: 700;
     font-size: 1.05rem;
     color: var(--navy);
-    text-decoration: none;
   }
-  .core-item a:hover { text-decoration: underline; }
   .core-item p {
-    margin: 8px 0 0;
-    font-size: 0.9rem;
+    margin: 0;
+    font-size: 0.88rem;
     color: var(--muted);
   }
+  .core-item .tip {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.78rem;
+    color: var(--teal);
+  }
+  .core-item .tip a { color: var(--teal); }
+
   h2.section-title {
     font-size: 1.15rem;
     color: var(--navy);
@@ -104,6 +164,7 @@
     padding-bottom: 8px;
     border-bottom: 2px solid var(--border);
   }
+
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -118,95 +179,140 @@
   }
   .card h3 {
     margin: 0 0 12px;
-    font-size: 1rem;
-    color: var(--navy);
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
     font-size: 0.8rem;
     color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
     font-weight: 700;
   }
-  .links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 10px;
-  }
-  .btn {
-    display: inline-block;
-    padding: 7px 14px;
-    background: var(--teal);
-    color: white;
-    text-decoration: none;
-    border-radius: 20px;
-    font-size: 0.88rem;
-    font-weight: 600;
-    transition: background 0.15s;
-  }
-  .btn:hover { background: #176d58; }
-  .btn.secondary {
-    background: white;
-    color: var(--navy);
-    border: 1px solid var(--border);
-  }
-  .btn.secondary:hover { background: #f1f4f7; }
   .card .note {
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     color: var(--muted);
-    margin: 0;
+    margin: 10px 0 0;
   }
-  .special {
-    background: #fff8ec;
-    border: 1px solid #f0dfb0;
+
+  /* ---- Site tiles (fully clickable) ---- */
+  .tiles {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
-  .special h3 { color: #92650c; }
-  .special .btn { background: var(--amber); }
-  .special .btn:hover { background: #c8901f; }
+  .tile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: #f7f9fb;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 0.94rem;
+    transition: background 0.12s ease, border-color 0.12s ease, transform 0.12s ease;
+  }
+  .tile:hover {
+    background: var(--teal-light);
+    border-color: #b7ddd2;
+    transform: translateX(2px);
+  }
+  .tile .icon { width: 24px; height: 24px; border-radius: 6px; padding: 3px; }
+  .tile .arrow {
+    margin-left: auto;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .wide { grid-column: 1 / -1; }
+  .group-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 16px 0 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .group-label:first-of-type { margin-top: 0; }
+  .tiles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 8px;
+  }
+  .tile .muted {
+    color: var(--muted);
+    font-weight: 500;
+    font-size: 0.82rem;
+  }
+  .icon.emoji {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    background: white;
+  }
+
   footer {
     text-align: center;
     color: var(--muted);
     font-size: 0.85rem;
     padding: 24px;
   }
-  .tag {
-    display: inline-block;
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: var(--teal);
-    background: var(--teal-light);
-    padding: 2px 8px;
-    border-radius: 10px;
-    margin-bottom: 8px;
-  }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>Our Shopping Hub</h1>
-  <p>The go-to sites for everything we used to buy on Amazon — organized by what to buy where.</p>
+  <div class="topbar-inner">
+    <div class="logo-mark">🛍️</div>
+    <h1>Our Shopping Hub</h1>
+    <p>The go-to sites for everything we used to buy on Amazon — organized by what to buy where.</p>
+  </div>
+  <div class="emoji-strip">🧺 🛒 📦 🎁 💳</div>
 </header>
 
 <main>
 
   <div class="core">
-    <h2>Start here — the core 3</h2>
+    <h2>Start here — pick one of these four first</h2>
     <div class="core-grid">
-      <div class="core-item">
-        <span class="num">1</span><br>
-        <a href="https://shop.app" target="_blank">Shop app</a>
+
+      <a class="core-item" href="https://shop.app" target="_blank">
+        <div class="row">
+          <span class="num">1</span>
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=shop.app&sz=64" alt="">
+          <span class="name">Shop app</span>
+        </div>
         <p>Independent &amp; specialty brands, one-click checkout with Shop Pay. Check here first for anything niche.</p>
-      </div>
-      <div class="core-item">
-        <span class="num">2</span><br>
-        <a href="https://www.costco.com" target="_blank">Costco</a>
+      </a>
+
+      <a class="core-item" href="https://www.costco.com" target="_blank">
+        <div class="row">
+          <span class="num">2</span>
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=costco.com&sz=64" alt="">
+          <span class="name">Costco</span>
+        </div>
         <p>Bulk groceries, household staples, electronics, furniture. Default for anything in quantity.</p>
-      </div>
-      <div class="core-item">
-        <span class="num">3</span><br>
-        <a href="https://www.target.com" target="_blank">Target</a>
+      </a>
+
+      <a class="core-item" href="https://www.target.com" target="_blank">
+        <div class="row">
+          <span class="num">3</span>
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=target.com&sz=64" alt="">
+          <span class="name">Target</span>
+        </div>
         <p>Single items, clothing, home decor, seasonal, pharmacy — everything Costco doesn't carry.</p>
-      </div>
+      </a>
+
+      <a class="core-item" href="https://shopping.google.com" target="_blank">
+        <div class="row">
+          <span class="num">4</span>
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=google.com&sz=64" alt="">
+          <span class="name">Google Shopping</span>
+        </div>
+        <p>Good starting point when you don't know where to buy something — compares sellers and prices at a glance.</p>
+        <span class="tip">Tip: install <a href="https://chromewebstore.google.com/detail/ublacklist/pncfbmialoiaghdehhbnbhkkgmjanfhe" target="_blank">uBlacklist</a> to hide amazon.com from regular Google search results.</span>
+      </a>
+
     </div>
   </div>
 
@@ -215,73 +321,364 @@
 
     <div class="card">
       <h3>Groceries</h3>
-      <div class="links">
-        <a class="btn" href="https://www.costco.com" target="_blank">Costco</a>
-        <a class="btn secondary" href="https://www.instacart.com/store/aldi" target="_blank">Aldi (Instacart)</a>
+      <div class="tiles">
+        <a class="tile" href="https://www.costco.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=costco.com&sz=64" alt="">
+          Costco <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://www.instacart.com/store/aldi" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=instacart.com&sz=64" alt="">
+          Aldi (via Instacart) <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://www.jewelosco.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=jewelosco.com&sz=64" alt="">
+          Jewel-Osco <span class="arrow">→</span>
+        </a>
       </div>
       <p class="note">Aldi has no real site of its own — order through Instacart.</p>
     </div>
 
     <div class="card">
+      <h3>Specialty wellness &amp; hydration</h3>
+      <div class="tiles">
+        <a class="tile" href="https://saltt.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=saltt.com&sz=64" alt="">
+          SALTT <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://living.redmond.com/products/re-lyte-bulk-pouches-175-serv?variant=41954624503856" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=living.redmond.com&sz=64" alt="">
+          Redmond Re-Lyte <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://www.nzepouches.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=nzepouches.com&sz=64" alt="">
+          NZE Pouches <span class="arrow">→</span>
+        </a>
+      </div>
+      <p class="note">Electrolyte mixes and caffeine pouches — didn't fit neatly under regular groceries.</p>
+    </div>
+
+    <div class="card">
       <h3>Household &amp; electronics</h3>
-      <div class="links">
-        <a class="btn" href="https://www.costco.com" target="_blank">Costco</a>
-        <a class="btn secondary" href="https://www.target.com" target="_blank">Target</a>
-        <a class="btn secondary" href="https://www.bestbuy.com" target="_blank">Best Buy</a>
+      <div class="tiles">
+        <a class="tile" href="https://www.costco.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=costco.com&sz=64" alt="">
+          Costco <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://www.target.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=target.com&sz=64" alt="">
+          Target <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://www.bestbuy.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=bestbuy.com&sz=64" alt="">
+          Best Buy <span class="arrow">→</span>
+        </a>
       </div>
       <p class="note">Best Buy for anything electronics/appliance-specific — price matching, Geek Squad.</p>
     </div>
 
     <div class="card">
       <h3>General marketplace</h3>
-      <div class="links">
-        <a class="btn" href="https://www.ebay.com" target="_blank">eBay</a>
+      <div class="tiles">
+        <a class="tile" href="https://www.ebay.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=ebay.com&sz=64" alt="">
+          eBay <span class="arrow">→</span>
+        </a>
       </div>
       <p class="note">Used, refurbished, or hard-to-find items — closest thing to Amazon's overall breadth.</p>
     </div>
 
     <div class="card">
       <h3>Books &amp; media</h3>
-      <div class="links">
-        <a class="btn" href="https://bookshop.org" target="_blank">Bookshop.org</a>
+      <div class="tiles">
+        <a class="tile" href="https://bookshop.org" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=bookshop.org&sz=64" alt="">
+          Bookshop.org <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://www.threeavenuesbookshop.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=threeavenuesbookshop.com&sz=64" alt="">
+          Three Avenues Bookshop <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://roscoebooks.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=roscoebooks.com&sz=64" alt="">
+          Roscoe Books <span class="arrow">→</span>
+        </a>
       </div>
       <p class="note">Same prices as Amazon, supports independent bookstores.</p>
     </div>
 
     <div class="card">
       <h3>Home &amp; furniture</h3>
-      <div class="links">
-        <a class="btn" href="https://www.wayfair.com" target="_blank">Wayfair</a>
-        <a class="btn secondary" href="https://www.target.com" target="_blank">Target</a>
+      <div class="tiles">
+        <a class="tile" href="https://www.wayfair.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=wayfair.com&sz=64" alt="">
+          Wayfair <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://www.target.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=target.com&sz=64" alt="">
+          Target <span class="arrow">→</span>
+        </a>
       </div>
     </div>
 
     <div class="card">
-      <h3>Clothing, handmade &amp; gifts</h3>
-      <div class="links">
-        <a class="btn" href="https://www.etsy.com" target="_blank">Etsy</a>
-        <a class="btn secondary" href="https://shop.app" target="_blank">Shop app</a>
+      <h3>Hardware &amp; home improvement</h3>
+      <div class="tiles">
+        <a class="tile" href="https://www.acehardware.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=acehardware.com&sz=64" alt="">
+          Ace Hardware <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://www.homedepot.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=homedepot.com&sz=64" alt="">
+          Home Depot <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://www.lowes.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=lowes.com&sz=64" alt="">
+          Lowe's <span class="arrow">→</span>
+        </a>
+      </div>
+      <p class="note">Ace for quick local pickup on small stuff; Home Depot/Lowe's for bigger projects and appliances.</p>
+    </div>
+
+    <div class="card">
+      <h3>Women's clothing</h3>
+      <div class="tiles">
+        <a class="tile" href="https://aliceandwonder.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=aliceandwonder.com&sz=64" alt="">
+          Alice and Wonder <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Men's clothing</h3>
+      <div class="tiles">
+        <a class="tile" href="https://anianmfg.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=anianmfg.com&sz=64" alt="">
+          Anian Mfg <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://www.johnnie-o.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=johnnie-o.com&sz=64" alt="">
+          johnnie-O <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://bonobos.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=bonobos.com&sz=64" alt="">
+          Bonobos <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://www.jockey.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=jockey.com&sz=64" alt="">
+          Jockey <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://www.kizik.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=kizik.com&sz=64" alt="">
+          Kizik <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://meundies.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=meundies.com&sz=64" alt="">
+          MeUndies <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://www.jiffy.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=jiffy.com&sz=64" alt="">
+          Jiffy <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Kids</h3>
+      <div class="tiles">
+        <a class="tile" href="https://aliceandwonder.com/pages/mini-wonder-home-page" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=aliceandwonder.com&sz=64" alt="">
+          Mini Wonder <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://kidsy.co" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=kidsy.co&sz=64" alt="">
+          Kidsy <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Handmade &amp; gifts</h3>
+      <div class="tiles">
+        <a class="tile" href="https://www.etsy.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=etsy.com&sz=64" alt="">
+          Etsy <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://shop.app" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=shop.app&sz=64" alt="">
+          Shop app <span class="arrow">→</span>
+        </a>
       </div>
     </div>
 
     <div class="card">
       <h3>Pharmacy &amp; health</h3>
-      <div class="links">
-        <a class="btn" href="https://www.cvs.com" target="_blank">CVS</a>
-        <a class="btn secondary" href="https://www.walgreens.com" target="_blank">Walgreens</a>
-        <a class="btn secondary" href="https://www.target.com" target="_blank">Target</a>
+      <div class="tiles">
+        <a class="tile" href="https://www.cvs.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=cvs.com&sz=64" alt="">
+          CVS <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://www.walgreens.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=walgreens.com&sz=64" alt="">
+          Walgreens <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://www.target.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=target.com&sz=64" alt="">
+          Target <span class="arrow">→</span>
+        </a>
       </div>
     </div>
 
-    <div class="card special">
-      <h3>Price comparison</h3>
-      <span class="tag">+ Amazon blocker</span>
-      <div class="links">
-        <a class="btn" href="https://shopping.google.com" target="_blank">Google Shopping</a>
-        <a class="btn secondary" href="https://chromewebstore.google.com/detail/ublacklist/pncfbmialoiaghdehhbnbhkkgmjanfhe" target="_blank">uBlacklist (Chrome)</a>
-        <a class="btn secondary" href="https://addons.mozilla.org/en-US/firefox/addon/ublacklist/" target="_blank">uBlacklist (Firefox)</a>
+    <div class="card">
+      <h3>HSA eligible</h3>
+      <div class="tiles">
+        <a class="tile" href="https://www.withflex.com/?search=Alpha-GPC" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=withflex.com&sz=64" alt="">
+          Flex <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://www.truemed.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=truemed.com&sz=64" alt="">
+          Truemed <span class="arrow">→</span>
+        </a>
       </div>
-      <p class="note">uBlacklist blocks amazon.com from regular Google search results. It's not confirmed to filter the Shopping tab itself — if Amazon still shows up there, manually deselect it in the seller filter.</p>
+      <p class="note">Use HSA/FSA dollars on supplements, wellness gear, and other items that don't usually qualify.</p>
+    </div>
+
+    <div class="card">
+      <h3>Outdoor &amp; sporting goods</h3>
+      <div class="tiles">
+        <a class="tile" href="https://playitagainsports.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=playitagainsports.com&sz=64" alt="">
+          Play It Again Sports <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://www.rei.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=rei.com&sz=64" alt="">
+          REI <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://www.dickssportinggoods.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=dickssportinggoods.com&sz=64" alt="">
+          Dick's Sporting Goods <span class="arrow">→</span>
+        </a>
+      </div>
+      <p class="note">Play It Again Sports for used/resale gear at a discount — good first stop before buying new.</p>
+    </div>
+
+    <div class="card">
+      <h3>Movies &amp; plays</h3>
+      <div class="tiles">
+        <a class="tile" href="https://musicboxtheatre.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=musicboxtheatre.com&sz=64" alt="">
+          Music Box Theatre <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://drafthouse.com/chicago" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=drafthouse.com&sz=64" alt="">
+          Alamo Drafthouse Chicago <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://www.steppenwolf.org" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=steppenwolf.org&sz=64" alt="">
+          Steppenwolf Theatre <span class="arrow">→</span>
+        </a>
+        <a class="tile" href="https://www.broadwayinchicago.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=broadwayinchicago.com&sz=64" alt="">
+          Broadway In Chicago <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="card wide">
+      <h3>Restaurants &amp; catering</h3>
+
+      <div class="tiles" style="margin-bottom: 6px;">
+        <a class="tile" href="https://docs.google.com/spreadsheets/d/1LflHC-aeXw-XiklVk8_l4wn5cruOuTo7hJZfewmhQ2s/edit?gid=1253701866#gid=1253701866" target="_blank">
+          <span class="icon emoji">📋</span>
+          Catering options (full spreadsheet) <span class="arrow">→</span>
+        </a>
+      </div>
+      <p class="note">Couldn't pull the sheet's contents in directly — it looks locked to viewers with access, so this links straight to it instead. Share it as "anyone with the link can view" and I can embed the actual rows here.</p>
+
+      <p class="group-label">Chicago — regulars</p>
+      <div class="tiles-grid">
+        <a class="tile" href="https://www.uncommonground.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=uncommonground.com&sz=64" alt="">
+          Uncommon Ground <span class="muted">· American</span>
+        </a>
+        <a class="tile" href="https://smallcheval.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=smallcheval.com&sz=64" alt="">
+          Small Cheval <span class="muted">· Burgers</span>
+        </a>
+        <a class="tile" href="https://sushimurachicago.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=sushimurachicago.com&sz=64" alt="">
+          Sushi Mura <span class="muted">· Sushi</span>
+        </a>
+        <a class="tile" href="https://www.samesamechicago.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=samesamechicago.com&sz=64" alt="">
+          Same Same <span class="muted">· Thai</span>
+        </a>
+        <a class="tile" href="https://turquoisedining.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=turquoisedining.com&sz=64" alt="">
+          Turquoise <span class="muted">· Mediterranean</span>
+        </a>
+        <a class="tile" href="https://www.google.com/maps/search/?api=1&query=Do%C3%B1a+Tola+Chicago" target="_blank">
+          <span class="icon emoji">📍</span>
+          Doña Tola <span class="muted">· Mexican</span>
+        </a>
+        <a class="tile" href="https://tangosurgrill.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=tangosurgrill.com&sz=64" alt="">
+          Tango Sur <span class="muted">· Argentinian</span>
+        </a>
+        <a class="tile" href="https://bodegasurchicago.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=bodegasurchicago.com&sz=64" alt="">
+          Bodega Sur <span class="muted">· Argentinian</span>
+        </a>
+        <a class="tile" href="https://www.google.com/maps/search/?api=1&query=El+Mexicana+Clark+St+Chicago" target="_blank">
+          <span class="icon emoji">📍</span>
+          El Mexicana (Clark) <span class="muted">· Mexican</span>
+        </a>
+        <a class="tile" href="https://www.google.com/maps/search/?api=1&query=El+Tap+Chicago" target="_blank">
+          <span class="icon emoji">📍</span>
+          El Tap <span class="muted">· Mexican</span>
+        </a>
+        <a class="tile" href="https://www.ellaellichicago.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=ellaellichicago.com&sz=64" alt="">
+          Ella Elli <span class="muted">· Mediterranean</span>
+        </a>
+        <a class="tile" href="https://www.google.com/maps/search/?api=1&query=Phos+restaurant+Chicago" target="_blank">
+          <span class="icon emoji">📍</span>
+          Phos <span class="muted">· Thai/Viet</span>
+        </a>
+        <a class="tile" href="https://www.crosbyschicago.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=crosbyschicago.com&sz=64" alt="">
+          Crosby's Kitchen <span class="muted">· American</span>
+        </a>
+      </div>
+
+      <p class="group-label">Chicago — to try</p>
+      <div class="tiles-grid">
+        <a class="tile" href="https://www.google.com/maps/search/?api=1&query=Professor+Pizza+Chicago" target="_blank">
+          <span class="icon emoji">📍</span>
+          Professor Pizza
+        </a>
+        <a class="tile" href="https://www.google.com/maps/search/?api=1&query=The+Slice+Shop+Chicago" target="_blank">
+          <span class="icon emoji">📍</span>
+          The Slice Shop
+        </a>
+        <a class="tile" href="https://www.billygoattavern.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=billygoattavern.com&sz=64" alt="">
+          Billy Goat Tavern
+        </a>
+      </div>
+
+      <p class="group-label">Hilton Head</p>
+      <div class="tiles-grid">
+        <a class="tile" href="https://www.fishcampwaterfront.com" target="_blank">
+          <img class="icon" src="https://www.google.com/s2/favicons?domain=fishcampwaterfront.com&sz=64" alt="">
+          Fishcamp
+        </a>
+        <a class="tile" href="https://hiltonheaddiner.secureserversites.net/" target="_blank">
+          <span class="icon emoji">📍</span>
+          Hilton Head Diner
+        </a>
+      </div>
     </div>
 
   </div>
