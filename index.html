@@ -515,15 +515,15 @@
 
   <div class="search-everywhere">
     <h2>🔎 Search everywhere at once</h2>
-    <p class="sub">Type one search and open results from every site below, each in its own tab.</p>
+    <p class="sub">Type one search, get a link for every site below — ⌘/Ctrl+click each to open it in the background.</p>
     <form id="searchEverywhereForm" class="search-row">
       <input type="text" id="searchEverywhereInput" placeholder="e.g. air fryer, baby gate, deck screws…" autocomplete="off">
-      <button type="submit">Search all</button>
+      <button type="submit">Get links</button>
     </form>
     <div class="search-sites" id="searchSites">
       <span class="toggle-all" id="toggleAllSites">Select all / none</span>
     </div>
-    <p class="search-note" id="searchStatus">Tries to open a new tab per site automatically. If your browser blocks that (Arc especially), click buttons will appear below to open each one manually — still one click per site.</p>
+    <p class="search-note" id="searchStatus">Type a search and hit "Get links" — a button appears below for every site, already carrying your search. Hold ⌘ (Mac) or Ctrl (Windows) while clicking each one to open it in a background tab, so you never leave this page. Shop app isn't included — it doesn't support a search link that actually runs the search.</p>
     <div class="search-links" id="searchLinks"></div>
   </div>
 
@@ -1017,7 +1017,6 @@
 <script>
   (function () {
     var SEARCH_SITES = [
-      { name: "Shop app", make: function (q) { return "https://shop.app/?q=" + q; } },
       { name: "Costco", make: function (q) { return "https://www.costco.com/CatalogSearch?keyword=" + q; } },
       { name: "Target", make: function (q) { return "https://www.target.com/s?searchTerm=" + q; } },
       { name: "Google Shopping", make: function (q) { return "https://www.google.com/search?tbm=shop&q=" + q; } },
@@ -1072,27 +1071,12 @@
       boxes.forEach(function (b) {
         if (b.checked) chosen.push(SEARCH_SITES[b.dataset.siteIndex]);
       });
-      // Open every tab synchronously, in the same tick as the click — that's
-      // as far as page code can go. Some browsers (Safari especially) only
-      // ever trust the FIRST window.open() per click no matter what, and
-      // silently block the rest as popups. There's no script-side way around
-      // that; it's an intentional anti-popup-spam protection. The only real
-      // fix is telling the browser this specific page is allowed to open
-      // multiple tabs (see message below).
-      var openedCount = 0;
-      var blockedCount = 0;
-      chosen.forEach(function (site) {
-        var w = window.open(site.make(encoded), "_blank");
-        if (w) { openedCount++; } else { blockedCount++; }
-      });
-
-      // Always render real <a target="_blank"> links too, not just the
-      // window.open() burst above. Some browsers — Arc in particular — cap
-      // script-triggered popups at one per click even after you allow pop-ups
-      // for the page, because they run their own tab-management layer on top
-      // of the standard permission. A genuine link click isn't a "popup" to
-      // any browser, so it's never subject to that limit — click each chip
-      // below and every one opens.
+      // No auto-opening here on purpose. window.open() always steals focus
+      // to the new tab in every browser — there's no script-level way to
+      // force a "background tab," that behavior is reserved for genuine
+      // Cmd/Ctrl+click or middle-click, which only a real user action can
+      // trigger. So instead we just render real links below and let you
+      // Cmd+click through them without ever leaving this page.
       linksWrap.innerHTML = "";
       chosen.forEach(function (site) {
         var a = document.createElement("a");
@@ -1103,13 +1087,7 @@
         linksWrap.appendChild(a);
       });
 
-      if (blockedCount === 0) {
-        statusEl.textContent = "Opened " + openedCount + " tab" + (openedCount === 1 ? "" : "s") + ". If your browser only opened one, click the buttons below instead — those always work, even in Arc.";
-      } else {
-        statusEl.textContent =
-          "Only " + openedCount + " of " + chosen.length + " tabs opened automatically — your browser blocked the rest as pop-ups. " +
-          "Click the buttons below instead; real link clicks aren't blocked by any browser's pop-up blocker.";
-      }
+      statusEl.textContent = chosen.length + " link" + (chosen.length === 1 ? "" : "s") + " ready below. Hold ⌘ (Mac) or Ctrl (Windows) while you click each one to open it in the background without leaving this page.";
     });
   })();
 </script>
