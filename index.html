@@ -143,6 +143,14 @@
     color: var(--ink);
     text-transform: uppercase;
   }
+  .core-sub {
+    margin: 8px 0 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+    opacity: 0.75;
+    max-width: 640px;
+  }
   .core-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -150,6 +158,11 @@
     margin-top: 22px;
     align-items: stretch;
   }
+  .core-grid--duo {
+    grid-template-columns: repeat(2, minmax(200px, 260px));
+    justify-content: center;
+  }
+  .core-grid--duo .core-item:nth-child(2) { background: var(--blue); }
   .core-item {
     position: relative;
     display: flex;
@@ -267,14 +280,19 @@
     margin-bottom: 22px;
   }
   .card h3 {
-    margin: 0 0 16px;
-    font-size: 1.05rem;
+    display: inline-block;
+    margin: 0 0 18px;
+    padding: 7px 16px;
+    font-size: 0.92rem;
     color: var(--ink);
     text-transform: uppercase;
     letter-spacing: 0.01em;
     font-weight: 800;
-    padding-bottom: 10px;
-    border-bottom: 3px dashed var(--ink);
+    background: var(--mint);
+    border: 3px solid var(--ink);
+    border-radius: 10px;
+    box-shadow: 4px 4px 0 var(--ink);
+    transform: rotate(-1deg);
   }
 
   /* ---- Site tiles (fully clickable) ---- */
@@ -513,6 +531,22 @@
 
 <main>
 
+  <div class="core">
+    <h2>🛍️ Start here</h2>
+    <p class="core-sub">Amazon's ease, minus Amazon. Shop brings thousands of independent stores into one app; Google Shopping backs it up for everything else.</p>
+    <div class="core-grid core-grid--duo">
+      <a class="core-item" href="https://shop.app" target="_blank">
+        <img class="icon" src="https://www.google.com/s2/favicons?domain=shop.app&sz=64" alt="">
+        <span class="name">Shop app</span>
+      </a>
+      <a class="core-item" href="https://shopping.google.com" target="_blank">
+        <img class="icon" src="https://www.google.com/s2/favicons?domain=google.com&sz=64" alt="">
+        <span class="name">Google Shopping</span>
+      </a>
+    </div>
+    <p class="ublacklist-note">Tip: install <a href="https://chromewebstore.google.com/detail/ublacklist/pncfbmialoiaghdehhbnbhkkgmjanfhe" target="_blank">uBlacklist</a> to hide amazon.com from Google search results.</p>
+  </div>
+
   <div class="search-everywhere">
     <h2>🔎 Search everywhere at once</h2>
     <p class="sub">Type one search, get a link for every site below — ⌘/Ctrl+click each to open it in the background.</p>
@@ -523,40 +557,8 @@
     <div class="search-sites" id="searchSites">
       <span class="toggle-all" id="toggleAllSites">Select all / none</span>
     </div>
-    <p class="search-note" id="searchStatus">Type a search and hit "Get links" — a button appears below for every site, already carrying your search. Hold ⌘ (Mac) or Ctrl (Windows) while clicking each one to open it in a background tab, so you never leave this page. Shop app isn't included — it doesn't support a search link that actually runs the search.</p>
+    <p class="search-note" id="searchStatus">Type a search and hit "Get links" — a button appears below for every site, already carrying your search. Hold ⌘ (Mac) or Ctrl (Windows) while clicking each one to open it in a background tab, so you never leave this page.</p>
     <div class="search-links" id="searchLinks"></div>
-  </div>
-
-  <div class="core">
-    <h2>Start here — pick one of these four first</h2>
-    <div class="core-grid">
-
-      <a class="core-item" href="https://shop.app" target="_blank">
-        <span class="num">1</span>
-        <img class="icon" src="https://www.google.com/s2/favicons?domain=shop.app&sz=64" alt="">
-        <span class="name">Shop app</span>
-      </a>
-
-      <a class="core-item" href="https://www.costco.com" target="_blank">
-        <span class="num">2</span>
-        <img class="icon" src="https://www.google.com/s2/favicons?domain=costco.com&sz=64" alt="">
-        <span class="name">Costco</span>
-      </a>
-
-      <a class="core-item" href="https://www.target.com" target="_blank">
-        <span class="num">3</span>
-        <img class="icon" src="https://www.google.com/s2/favicons?domain=target.com&sz=64" alt="">
-        <span class="name">Target</span>
-      </a>
-
-      <a class="core-item" href="https://shopping.google.com" target="_blank">
-        <span class="num">4</span>
-        <img class="icon" src="https://www.google.com/s2/favicons?domain=google.com&sz=64" alt="">
-        <span class="name">Google Shopping</span>
-      </a>
-
-    </div>
-    <p class="ublacklist-note">Tip: install <a href="https://chromewebstore.google.com/detail/ublacklist/pncfbmialoiaghdehhbnbhkkgmjanfhe" target="_blank">uBlacklist</a> to hide amazon.com from Google search results.</p>
   </div>
 
   <h2 class="section-title">By category</h2>
@@ -564,7 +566,7 @@
   <div class="grid-pair">
 
     <div class="card">
-      <h3>🛒 Groceries</h3>
+      <h3 style="background: var(--mint);">🛒 Groceries</h3>
       <div class="tiles">
         <a class="tile" href="https://www.costco.com" target="_blank">
           <img class="icon" src="https://www.google.com/s2/favicons?domain=costco.com&sz=64" alt="">
@@ -582,7 +584,7 @@
     </div>
 
     <div class="card">
-      <h3>🔨 Hardware &amp; home improvement</h3>
+      <h3 style="background: var(--yellow);">🔨 Hardware &amp; home improvement</h3>
       <div class="tiles">
         <a class="tile" href="https://www.acehardware.com" target="_blank">
           <img class="icon" src="https://www.google.com/s2/favicons?domain=acehardware.com&sz=64" alt="">
@@ -604,7 +606,7 @@
   <div class="grid">
 
     <div class="card">
-      <h3>🏷️ New and used marketplace</h3>
+      <h3 style="background: var(--coral);">🏷️ New and used marketplace</h3>
       <div class="tiles">
         <a class="tile" href="https://www.ebay.com" target="_blank">
           <img class="icon" src="https://www.google.com/s2/favicons?domain=ebay.com&sz=64" alt="">
@@ -614,7 +616,7 @@
     </div>
 
     <div class="card">
-      <h3>🧸 Kids</h3>
+      <h3 style="background: var(--blue);">🧸 Kids</h3>
       <div class="tiles">
         <a class="tile" href="https://aliceandwonder.com/pages/mini-wonder-home-page" target="_blank">
           <img class="icon" src="https://www.google.com/s2/favicons?domain=aliceandwonder.com&sz=64" alt="">
@@ -656,7 +658,7 @@
     </div>
 
     <div class="card">
-      <h3>💻 Electronics</h3>
+      <h3 style="background: var(--purple);">💻 Electronics</h3>
       <div class="tiles">
         <a class="tile" href="https://www.bestbuy.com" target="_blank">
           <img class="icon" src="https://www.google.com/s2/favicons?domain=bestbuy.com&sz=64" alt="">
@@ -670,7 +672,7 @@
     </div>
 
     <div class="card">
-      <h3>🎁 Handmade, gifts &amp; crafts</h3>
+      <h3 style="background: var(--pink);">🎁 Handmade, gifts &amp; crafts</h3>
       <div class="tiles">
         <a class="tile" href="https://www.etsy.com" target="_blank">
           <img class="icon" src="https://www.google.com/s2/favicons?domain=etsy.com&sz=64" alt="">
@@ -687,7 +689,7 @@
     </div>
 
     <div class="card">
-      <h3>📚 Books &amp; media</h3>
+      <h3 style="background: var(--mint);">📚 Books &amp; media</h3>
       <div class="tiles">
         <a class="tile" href="https://play.google.com/store/books?hl=en_US" target="_blank">
           <img class="icon" src="https://www.google.com/s2/favicons?domain=play.google.com&sz=64" alt="">
@@ -713,7 +715,7 @@
     </div>
 
     <div class="card">
-      <h3>🛋️ Home &amp; furniture</h3>
+      <h3 style="background: var(--yellow);">🛋️ Home &amp; furniture</h3>
       <div class="tiles">
         <a class="tile" href="https://www.wayfair.com" target="_blank">
           <img class="icon" src="https://www.google.com/s2/favicons?domain=wayfair.com&sz=64" alt="">
@@ -739,7 +741,7 @@
     </div>
 
     <div class="card">
-      <h3>💊 Pharmacy &amp; health</h3>
+      <h3 style="background: var(--coral);">💊 Pharmacy &amp; health</h3>
       <div class="tiles">
         <a class="tile" href="https://www.cvs.com" target="_blank">
           <img class="icon" src="https://www.google.com/s2/favicons?domain=cvs.com&sz=64" alt="">
@@ -753,7 +755,7 @@
     </div>
 
     <div class="card">
-      <h3>💳 HSA eligible</h3>
+      <h3 style="background: var(--blue);">💳 HSA eligible</h3>
       <div class="tiles">
         <a class="tile" href="https://www.withflex.com/?search=Alpha-GPC" target="_blank">
           <img class="icon" src="https://www.google.com/s2/favicons?domain=withflex.com&sz=64" alt="">
@@ -767,7 +769,7 @@
     </div>
 
     <div class="card">
-      <h3>🏕️ Outdoor &amp; sporting goods</h3>
+      <h3 style="background: var(--purple);">🏕️ Outdoor &amp; sporting goods</h3>
       <div class="tiles">
         <a class="tile" href="https://playitagainsports.com" target="_blank">
           <img class="icon" src="https://www.google.com/s2/favicons?domain=playitagainsports.com&sz=64" alt="">
@@ -785,7 +787,7 @@
     </div>
 
     <div class="card">
-      <h3>👗 Women's clothing</h3>
+      <h3 style="background: var(--pink);">👗 Women's clothing</h3>
       <div class="tiles">
         <a class="tile" href="https://aliceandwonder.com" target="_blank">
           <img class="icon" src="https://www.google.com/s2/favicons?domain=aliceandwonder.com&sz=64" alt="">
@@ -795,7 +797,7 @@
     </div>
 
     <div class="card">
-      <h3>🎬 Movies &amp; plays</h3>
+      <h3 style="background: var(--mint);">🎬 Movies &amp; plays</h3>
       <div class="tiles">
         <a class="tile" href="https://musicboxtheatre.com" target="_blank">
           <img class="icon" src="https://www.google.com/s2/favicons?domain=musicboxtheatre.com&sz=64" alt="">
@@ -817,7 +819,7 @@
     </div>
 
     <div class="card">
-      <h3>💧 Specialty wellness &amp; hydration</h3>
+      <h3 style="background: var(--yellow);">💧 Specialty wellness &amp; hydration</h3>
       <div class="tiles">
         <a class="tile" href="https://saltt.com" target="_blank">
           <img class="icon" src="https://www.google.com/s2/favicons?domain=saltt.com&sz=64" alt="">
@@ -835,7 +837,7 @@
     </div>
 
     <div class="card">
-      <h3>🍿 Specialty snacks</h3>
+      <h3 style="background: var(--coral);">🍿 Specialty snacks</h3>
       <p class="scope-note">We only use Walmart for these two — not for general shopping:</p>
       <div class="tiles">
         <a class="tile" href="https://www.walmart.com/ip/SOLELY-Organic-Mango-Blueberry-Whole-Fruit-Gummies-pack-of-6-Boxes-5-Bags-per-Box-Healthy-Chewy-Snacks-for-All-Vegan-Snacks-30-Bags/18558817632" target="_blank">
@@ -850,7 +852,7 @@
     </div>
 
     <div class="card">
-      <h3>👔 Men's clothing</h3>
+      <h3 style="background: var(--blue);">👔 Men's clothing</h3>
       <div class="tiles">
         <a class="tile" href="https://anianmfg.com" target="_blank">
           <img class="icon" src="https://www.google.com/s2/favicons?domain=anianmfg.com&sz=64" alt="">
@@ -884,7 +886,7 @@
     </div>
 
     <div class="card wide">
-      <h3>🍽️ Restaurants &amp; catering</h3>
+      <h3 style="background: var(--purple);">🍽️ Restaurants &amp; catering</h3>
 
       <div class="tiles" style="margin-bottom: 6px;">
         <a class="tile" href="https://docs.google.com/spreadsheets/d/1LflHC-aeXw-XiklVk8_l4wn5cruOuTo7hJZfewmhQ2s/edit?gid=1253701866#gid=1253701866" target="_blank">
@@ -1033,7 +1035,14 @@
       { name: "Crate and Barrel", make: function (q) { return "https://www.crateandbarrel.com/search?query=" + q; } },
       { name: "Etsy", make: function (q) { return "https://www.etsy.com/search?q=" + q; } },
       { name: "REI", make: function (q) { return "https://www.rei.com/search?q=" + q; } },
-      { name: "Dick's Sporting Goods", make: function (q) { return "https://www.dickssportinggoods.com/search?searchTerm=" + q; } }
+      { name: "Dick's Sporting Goods", make: function (q) { return "https://www.dickssportinggoods.com/search?searchTerm=" + q; } },
+      { name: "Mini Wonder", make: function (q) { return "https://aliceandwonder.com/search?q=" + q; } },
+      { name: "Kidsy", make: function (q) { return "https://kidsy.co/search?q=" + q; } },
+      { name: "Building Blocks Toys", make: function (q) { return "https://www.buildingblockstoys.com/search?q=" + q; } },
+      { name: "Magnetic Me", make: function (q) { return "https://magneticme.com/search?q=" + q; } },
+      { name: "Baby Gap", make: function (q) { return "https://www.gap.com/search?searchText=" + q; } },
+      { name: "Timeless Toys", make: function (q) { return "https://timelesstoys.com/search?q=" + q; } },
+      { name: "IKEA", make: function (q) { return "https://www.ikea.com/us/en/search/?q=" + q; } }
     ];
 
     var sitesWrap = document.getElementById("searchSites");
