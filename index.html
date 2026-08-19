@@ -495,7 +495,7 @@
     <div class="search-sites" id="searchSites">
       <span class="toggle-all" id="toggleAllSites">Select all / none</span>
     </div>
-    <p class="search-note">Opens a new tab per site with your search already run. Shop app isn't included — it doesn't have a web search link to open. Your browser may ask to allow pop-ups the first time.</p>
+    <p class="search-note" id="searchStatus">Opens a new tab per site with your search already run. Your browser may ask to allow pop-ups the first time.</p>
   </div>
 
   <div class="core">
@@ -988,6 +988,7 @@
 <script>
   (function () {
     var SEARCH_SITES = [
+      { name: "Shop app", make: function (q) { return "https://shop.app/?q=" + q; } },
       { name: "Costco", make: function (q) { return "https://www.costco.com/CatalogSearch?keyword=" + q; } },
       { name: "Target", make: function (q) { return "https://www.target.com/s?searchTerm=" + q; } },
       { name: "Google Shopping", make: function (q) { return "https://www.google.com/search?tbm=shop&q=" + q; } },
@@ -1011,6 +1012,8 @@
     var toggleAll = document.getElementById("toggleAllSites");
     var form = document.getElementById("searchEverywhereForm");
     var input = document.getElementById("searchEverywhereInput");
+    var statusEl = document.getElementById("searchStatus");
+    var defaultStatusText = statusEl.textContent;
 
     SEARCH_SITES.forEach(function (site, i) {
       var label = document.createElement("label");
@@ -1039,14 +1042,29 @@
       boxes.forEach(function (b) {
         if (b.checked) chosen.push(SEARCH_SITES[b.dataset.siteIndex]);
       });
-      // Open every tab synchronously, in the same tick as the click. Browsers
-      // only treat window.open() as "user-initiated" (and skip the popup
-      // blocker) while still inside the original click handler — any delay
-      // (even a short setTimeout) makes later calls look like an unrequested
-      // popup and they get silently blocked.
+      // Open every tab synchronously, in the same tick as the click — that's
+      // as far as page code can go. Some browsers (Safari especially) only
+      // ever trust the FIRST window.open() per click no matter what, and
+      // silently block the rest as popups. There's no script-side way around
+      // that; it's an intentional anti-popup-spam protection. The only real
+      // fix is telling the browser this specific page is allowed to open
+      // multiple tabs (see message below).
+      var openedCount = 0;
+      var blockedCount = 0;
       chosen.forEach(function (site) {
-        window.open(site.make(encoded), "_blank");
+        var w = window.open(site.make(encoded), "_blank");
+        if (w) { openedCount++; } else { blockedCount++; }
       });
+
+      if (blockedCount === 0) {
+        statusEl.textContent = "Opened " + openedCount + " tab" + (openedCount === 1 ? "" : "s") + ".";
+      } else {
+        statusEl.textContent =
+          "Only " + openedCount + " of " + chosen.length + " tabs opened — your browser blocked the rest as pop-ups. " +
+          "Fix: in Safari, go to Safari > Settings > Websites > Pop-up Windows and set this page to \"Allow\". " +
+          "In Chrome, click the pop-up-blocked icon in the address bar (or Site settings) and choose \"Always allow pop-ups from this site.\" " +
+          "Then run the search again.";
+      }
     });
   })();
 </script>
