@@ -467,6 +467,34 @@
     color: var(--ink);
     opacity: 0.65;
   }
+  .search-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .search-links:empty {
+    margin-top: 0;
+  }
+  .search-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    font-size: 0.9rem;
+    font-weight: 800;
+    text-decoration: none;
+    color: var(--ink);
+    background: var(--yellow);
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    box-shadow: 3px 3px 0 var(--ink);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+  }
+  .search-links a:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 var(--ink);
+  }
 </style>
 </head>
 <body>
@@ -495,7 +523,8 @@
     <div class="search-sites" id="searchSites">
       <span class="toggle-all" id="toggleAllSites">Select all / none</span>
     </div>
-    <p class="search-note" id="searchStatus">Opens a new tab per site with your search already run. Your browser may ask to allow pop-ups the first time.</p>
+    <p class="search-note" id="searchStatus">Tries to open a new tab per site automatically. If your browser blocks that (Arc especially), click buttons will appear below to open each one manually — still one click per site.</p>
+    <div class="search-links" id="searchLinks"></div>
   </div>
 
   <div class="core">
@@ -1014,6 +1043,7 @@
     var input = document.getElementById("searchEverywhereInput");
     var statusEl = document.getElementById("searchStatus");
     var defaultStatusText = statusEl.textContent;
+    var linksWrap = document.getElementById("searchLinks");
 
     SEARCH_SITES.forEach(function (site, i) {
       var label = document.createElement("label");
@@ -1056,14 +1086,29 @@
         if (w) { openedCount++; } else { blockedCount++; }
       });
 
+      // Always render real <a target="_blank"> links too, not just the
+      // window.open() burst above. Some browsers — Arc in particular — cap
+      // script-triggered popups at one per click even after you allow pop-ups
+      // for the page, because they run their own tab-management layer on top
+      // of the standard permission. A genuine link click isn't a "popup" to
+      // any browser, so it's never subject to that limit — click each chip
+      // below and every one opens.
+      linksWrap.innerHTML = "";
+      chosen.forEach(function (site) {
+        var a = document.createElement("a");
+        a.href = site.make(encoded);
+        a.target = "_blank";
+        a.rel = "noopener";
+        a.textContent = "↗ " + site.name;
+        linksWrap.appendChild(a);
+      });
+
       if (blockedCount === 0) {
-        statusEl.textContent = "Opened " + openedCount + " tab" + (openedCount === 1 ? "" : "s") + ".";
+        statusEl.textContent = "Opened " + openedCount + " tab" + (openedCount === 1 ? "" : "s") + ". If your browser only opened one, click the buttons below instead — those always work, even in Arc.";
       } else {
         statusEl.textContent =
-          "Only " + openedCount + " of " + chosen.length + " tabs opened — your browser blocked the rest as pop-ups. " +
-          "Fix: in Safari, go to Safari > Settings > Websites > Pop-up Windows and set this page to \"Allow\". " +
-          "In Chrome, click the pop-up-blocked icon in the address bar (or Site settings) and choose \"Always allow pop-ups from this site.\" " +
-          "Then run the search again.";
+          "Only " + openedCount + " of " + chosen.length + " tabs opened automatically — your browser blocked the rest as pop-ups. " +
+          "Click the buttons below instead; real link clicks aren't blocked by any browser's pop-up blocker.";
       }
     });
   })();
