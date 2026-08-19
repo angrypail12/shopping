@@ -357,6 +357,116 @@
     font-size: 1rem;
     padding: 34px;
   }
+
+  /* ---- Search everywhere ---- */
+  .search-everywhere {
+    background: var(--card-bg);
+    border: 4px solid var(--ink);
+    border-radius: 22px;
+    padding: 30px 34px;
+    margin-bottom: 44px;
+    box-shadow: 8px 8px 0 var(--ink);
+  }
+  .search-everywhere h2 {
+    margin: 0 0 6px;
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .search-everywhere .sub {
+    margin: 0 0 20px;
+    font-size: 0.94rem;
+    font-weight: 600;
+    color: var(--ink);
+    opacity: 0.7;
+  }
+  .search-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .search-row input[type="text"] {
+    flex: 1 1 260px;
+    min-width: 200px;
+    padding: 14px 18px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    border: 3px solid var(--ink);
+    border-radius: 12px;
+    background: var(--paper);
+    color: var(--ink);
+  }
+  .search-row input[type="text"]::placeholder {
+    color: var(--ink);
+    opacity: 0.45;
+    font-weight: 600;
+  }
+  .search-row button {
+    flex: 0 0 auto;
+    padding: 14px 26px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-family: 'Poppins', sans-serif;
+    color: var(--ink);
+    background: var(--coral);
+    border: 3px solid var(--ink);
+    border-radius: 12px;
+    box-shadow: 4px 4px 0 var(--ink);
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+  }
+  .search-row button:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--ink);
+  }
+  .search-row button:active {
+    transform: translate(0, 0);
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  .search-sites {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+  }
+  .search-sites label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .search-sites input {
+    accent-color: var(--coral);
+  }
+  .search-sites .toggle-all {
+    background: var(--mint);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+    border: 2px solid var(--ink);
+    padding: 6px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .search-note {
+    margin: 16px 0 0;
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--ink);
+    opacity: 0.65;
+  }
 </style>
 </head>
 <body>
@@ -374,6 +484,19 @@
 </header>
 
 <main>
+
+  <div class="search-everywhere">
+    <h2>🔎 Search everywhere at once</h2>
+    <p class="sub">Type one search and open results from every site below, each in its own tab.</p>
+    <form id="searchEverywhereForm" class="search-row">
+      <input type="text" id="searchEverywhereInput" placeholder="e.g. air fryer, baby gate, deck screws…" autocomplete="off">
+      <button type="submit">Search all</button>
+    </form>
+    <div class="search-sites" id="searchSites">
+      <span class="toggle-all" id="toggleAllSites">Select all / none</span>
+    </div>
+    <p class="search-note">Opens a new tab per site with your search already run. Shop app isn't included — it doesn't have a web search link to open. Your browser may ask to allow pop-ups the first time.</p>
+  </div>
 
   <div class="core">
     <h2>Start here — pick one of these four first</h2>
@@ -861,6 +984,62 @@
 <footer>
   Bookmark this page.
 </footer>
+
+<script>
+  (function () {
+    var SEARCH_SITES = [
+      { name: "Costco", make: function (q) { return "https://www.costco.com/CatalogSearch?keyword=" + q; } },
+      { name: "Target", make: function (q) { return "https://www.target.com/s?searchTerm=" + q; } },
+      { name: "Google Shopping", make: function (q) { return "https://www.google.com/search?tbm=shop&q=" + q; } },
+      { name: "Home Depot", make: function (q) { return "https://www.homedepot.com/s/" + q; } },
+      { name: "Ace Hardware", make: function (q) { return "https://www.acehardware.com/search?query=" + q; } },
+      { name: "Kidzmax", make: function (q) { return "https://kidzmax.com/search?q=" + q; } },
+      { name: "Best Buy", make: function (q) { return "https://www.bestbuy.com/site/searchpage.jsp?st=" + q; } },
+      { name: "The Red Balloon", make: function (q) { return "https://theredballoon.com/search?q=" + q; } },
+      { name: "Cloud and Bunny", make: function (q) { return "https://cloudandbunny.com/search?q=" + q; } },
+      { name: "Walmart", make: function (q) { return "https://www.walmart.com/search?q=" + q; } }
+    ];
+
+    var sitesWrap = document.getElementById("searchSites");
+    var toggleAll = document.getElementById("toggleAllSites");
+    var form = document.getElementById("searchEverywhereForm");
+    var input = document.getElementById("searchEverywhereInput");
+
+    SEARCH_SITES.forEach(function (site, i) {
+      var label = document.createElement("label");
+      var cb = document.createElement("input");
+      cb.type = "checkbox";
+      cb.checked = true;
+      cb.dataset.siteIndex = i;
+      label.appendChild(cb);
+      label.appendChild(document.createTextNode(site.name));
+      sitesWrap.insertBefore(label, toggleAll);
+    });
+
+    toggleAll.addEventListener("click", function () {
+      var boxes = sitesWrap.querySelectorAll('input[type="checkbox"]');
+      var anyUnchecked = Array.prototype.some.call(boxes, function (b) { return !b.checked; });
+      boxes.forEach(function (b) { b.checked = anyUnchecked; });
+    });
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var q = input.value.trim();
+      if (!q) { input.focus(); return; }
+      var encoded = encodeURIComponent(q);
+      var boxes = sitesWrap.querySelectorAll('input[type="checkbox"]');
+      var chosen = [];
+      boxes.forEach(function (b) {
+        if (b.checked) chosen.push(SEARCH_SITES[b.dataset.siteIndex]);
+      });
+      chosen.forEach(function (site, i) {
+        setTimeout(function () {
+          window.open(site.make(encoded), "_blank");
+        }, i * 120);
+      });
+    });
+  })();
+</script>
 
 </body>
 </html>
