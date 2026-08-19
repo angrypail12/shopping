@@ -997,7 +997,14 @@
       { name: "Best Buy", make: function (q) { return "https://www.bestbuy.com/site/searchpage.jsp?st=" + q; } },
       { name: "The Red Balloon", make: function (q) { return "https://theredballoon.com/search?q=" + q; } },
       { name: "Cloud and Bunny", make: function (q) { return "https://cloudandbunny.com/search?q=" + q; } },
-      { name: "Walmart", make: function (q) { return "https://www.walmart.com/search?q=" + q; } }
+      { name: "Walmart", make: function (q) { return "https://www.walmart.com/search?q=" + q; } },
+      { name: "eBay", make: function (q) { return "https://www.ebay.com/sch/i.html?_nkw=" + q; } },
+      { name: "Wayfair", make: function (q) { return "https://www.wayfair.com/keyword.php?keyword=" + q; } },
+      { name: "Pottery Barn", make: function (q) { return "https://www.potterybarn.com/search/?words=" + q; } },
+      { name: "Crate and Barrel", make: function (q) { return "https://www.crateandbarrel.com/search?query=" + q; } },
+      { name: "Etsy", make: function (q) { return "https://www.etsy.com/search?q=" + q; } },
+      { name: "REI", make: function (q) { return "https://www.rei.com/search?q=" + q; } },
+      { name: "Dick's Sporting Goods", make: function (q) { return "https://www.dickssportinggoods.com/search?searchTerm=" + q; } }
     ];
 
     var sitesWrap = document.getElementById("searchSites");
@@ -1032,10 +1039,13 @@
       boxes.forEach(function (b) {
         if (b.checked) chosen.push(SEARCH_SITES[b.dataset.siteIndex]);
       });
-      chosen.forEach(function (site, i) {
-        setTimeout(function () {
-          window.open(site.make(encoded), "_blank");
-        }, i * 120);
+      // Open every tab synchronously, in the same tick as the click. Browsers
+      // only treat window.open() as "user-initiated" (and skip the popup
+      // blocker) while still inside the original click handler — any delay
+      // (even a short setTimeout) makes later calls look like an unrequested
+      // popup and they get silently blocked.
+      chosen.forEach(function (site) {
+        window.open(site.make(encoded), "_blank");
       });
     });
   })();
